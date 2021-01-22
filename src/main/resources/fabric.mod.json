@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "lessclutter",
+  "version": "${version}",
+
+  "name": "Less Clutter",
+  "description": "removes features which look bad",
+  "authors": [
+    "SFort"
+  ],
+  "contact": {
+    "sources": "https://github.com/SFort/MC-LessClutter"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": ["tf.ssf.sfort.Config"]
+  },
+  "mixins": [
+    "mod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "*"
+  }
+}
