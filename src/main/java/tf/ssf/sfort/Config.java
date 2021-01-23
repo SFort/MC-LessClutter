@@ -16,7 +16,9 @@ public class Config implements ModInitializer{
     public static boolean removedHudName = true;
     public static boolean lessTooltips = false;
     public static boolean dynamicCrosshair = true;
-    
+    public static boolean instantCrouch = true;
+
+
     @Override
     public void onInitialize() {
         // Configs
@@ -30,11 +32,13 @@ public class Config implements ModInitializer{
             List<String> defaultDesc = Arrays.asList(
                     "^-Less item tooltips [false] true | false",
                     "^-Removed hud name display [true] true | false",
-                    "^-Dynamic cross-hair [true] true | false "
+                    "^-Dynamic cross-hair [true] true | false ",
+                    "^-Instant crouch [true] true | false "
             );
             String[] ls = la.toArray(new String[Math.max(la.size(), defaultDesc.size() * 2)|1]);
             for (int i = 0; i<defaultDesc.size();++i)
                 ls[i*2+1]= defaultDesc.get(i);
+
             try{
                 lessTooltips = ls[0].contains("true");}catch (Exception ignore){}
             ls[0] = String.valueOf(lessTooltips);
@@ -45,7 +49,10 @@ public class Config implements ModInitializer{
             try{
                 dynamicCrosshair = ls[4].contains("true");}catch (Exception ignore){}
             ls[4] = String.valueOf(dynamicCrosshair);
-
+            
+            try{
+                instantCrouch = ls[6].contains("true");}catch (Exception ignore){}
+            ls[6] = String.valueOf(instantCrouch);
 
 
             Files.write(confFile.toPath(), Arrays.asList(ls));

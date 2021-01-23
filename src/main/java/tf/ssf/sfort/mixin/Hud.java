@@ -18,7 +18,7 @@ public abstract class Hud {
 	private ItemStack currentStack;
 	@Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
 	private void renderCrosshair(MatrixStack matrices, CallbackInfo info) {
-		if (!(currentStack.getItem() instanceof BlockItem) && Config.dynamicCrosshair)
+		if (Config.dynamicCrosshair && !(currentStack.getItem() instanceof BlockItem))
 			info.cancel();
 	}
 	@Shadow
