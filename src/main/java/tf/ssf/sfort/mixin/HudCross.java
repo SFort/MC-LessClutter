@@ -9,26 +9,14 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tf.ssf.sfort.Config;
 
 @Mixin(value = InGameHud.class, priority = 2023)
-public abstract class Hud {
-
+public abstract class HudCross {
 	@Shadow
 	private ItemStack currentStack;
 	@Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
 	private void renderCrosshair(MatrixStack matrices, CallbackInfo info) {
 		if (Config.dynamicCrosshair && !(currentStack.getItem() instanceof BlockItem))
 			info.cancel();
-	}
-	@Shadow
-	private int heldItemTooltipFade;
-
-	@Inject(at = @At("HEAD"), method = "renderHeldItemTooltip")
-	public void renderHeldItemTooltip(MatrixStack matrixStack, CallbackInfo info){
-		//I can't figure out how todo conditional injections
-		//so here i go writing this shit
-		if (Config.removedHudName)
-			heldItemTooltipFade = 0;
 	}
 }
