@@ -16,7 +16,7 @@
 
   "environment": "*",
   "mixins": [
-    "mod.mixins.json"
+    "lessclutter.mixins.json"
   ],
 
   "depends": {
