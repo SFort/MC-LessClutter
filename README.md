@@ -3,10 +3,13 @@ Client-side
 Configurable Features:
 - Static Tooltips  
 <img src="img/1.png" height=320/>  
-- Less item tooltips  
+
+- Less item tooltips
+
 > Reduces the amount of lines a tooltip can have to 1
 
-- Instant crouch  
+- Instant crouch
+
 > Removes the camera transition for going prone / sneaking
 
 - Removed hud name display  
