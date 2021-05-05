@@ -9,7 +9,8 @@
 	"Cam",
 	"Item",
 	"HudItem",
-	"HudCross"
+	"HudCross",
+	"ItemStatic"
 ],
 "injectors": {
 	"defaultRequire": 1
