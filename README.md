@@ -2,7 +2,7 @@ Client-side
 ## MC- Less Clutter
 Configurable Features:
 - Static Tooltips  
-![](img/1.png)  
+<img src="img/1.png" height=320/>  
 - Less item tooltips  
 > Reduces the amount of lines a tooltip can have to 1
 
