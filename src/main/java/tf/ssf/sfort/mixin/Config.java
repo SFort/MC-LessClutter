@@ -25,6 +25,7 @@ public class Config implements IMixinConfigPlugin {
     public static boolean dynamicCrosshair = true;
     public static boolean instantCrouch = true;
     public static boolean staticTooltip = false;
+    public static boolean removedHudArmor = true;
     @Override
     public void onLoad(String mixinPackage) {
         // Configs
@@ -40,7 +41,8 @@ public class Config implements IMixinConfigPlugin {
                     "^-Removed hud name display [true] true | false",
                     "^-Dynamic cross-hair [true] true | false",
                     "^-Instant crouch [true] true | false",
-                    "^-Static tooltip position [true] true | false"
+                    "^-Static tooltip position [false] true | false",
+                    "^-Removed armor hud [true] true | false"
             );
             String[] ls = la.toArray(new String[Math.max(la.size(), defaultDesc.size() * 2)|1]);
             final int hash = Arrays.hashCode(ls);
@@ -62,6 +64,9 @@ public class Config implements IMixinConfigPlugin {
             try{ staticTooltip = ls[8].startsWith("true");}catch (Exception ignore){}
             ls[8] = String.valueOf(staticTooltip);
 
+            try{ removedHudArmor = ls[10].contains("true");}catch (Exception ignore){}
+            ls[10] = String.valueOf(removedHudArmor);
+
             if (hash != Arrays.hashCode(ls))
                 Files.write(confFile.toPath(), Arrays.asList(ls));
             LOGGER.log(Level.INFO,"tf.ssf.sfort.lessclutter successfully loaded config file");
@@ -78,6 +83,7 @@ public class Config implements IMixinConfigPlugin {
             case "tf.ssf.sfort.mixin.Cam":{return instantCrouch;}
             case "tf.ssf.sfort.mixin.Item":{return lessTooltips;}
             case "tf.ssf.sfort.mixin.HudItem":{return removedHudName;}
+            case "tf.ssf.sfort.mixin.HudArmor":{return removedHudArmor;}
             case "tf.ssf.sfort.mixin.HudCross":{return dynamicCrosshair;}
             case "tf.ssf.sfort.mixin.ItemStatic":{return staticTooltip;}
 

@@ -1,18 +1,20 @@
 {
-"required": true,
-"minVersion": "0.8",
-"package": "tf.ssf.sfort.mixin",
-"compatibilityLevel": "JAVA_8",
-"plugin": "tf.ssf.sfort.mixin.Config",
-"mixins": [],
-"client": [
+  "required": true,
+  "minVersion": "0.8",
+  "package": "tf.ssf.sfort.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "plugin": "tf.ssf.sfort.mixin.Config",
+  "mixins": [
+  ],
+  "client": [
 	"Cam",
-	"Item",
-	"HudItem",
 	"HudCross",
+	"HudArmor",
+	"HudItem",
+	"Item",
 	"ItemStatic"
-],
-"injectors": {
+  ],
+  "injectors": {
 	"defaultRequire": 1
 }
 }

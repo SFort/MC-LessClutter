@@ -1,6 +1,10 @@
 Client-side
 ## MC- Less Clutter
 Configurable Features:
+- Removed armor hud
+
+> No more pointless chestplate icons
+
 - Static Tooltips  
 <img src="img/1.png" height=320/>  
 
