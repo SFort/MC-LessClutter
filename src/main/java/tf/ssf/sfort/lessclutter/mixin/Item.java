@@ -1,4 +1,4 @@
-package tf.ssf.sfort.mixin;
+package tf.ssf.sfort.lessclutter.mixin;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;

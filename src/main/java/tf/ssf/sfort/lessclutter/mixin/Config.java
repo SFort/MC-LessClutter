@@ -1,4 +1,4 @@
-package tf.ssf.sfort.mixin;
+package tf.ssf.sfort.lessclutter.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.util.sat4j.core.VecInt;
@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Config implements IMixinConfigPlugin {
+    private static final String mixin_dir = "tf.ssf.sfort.lessclutter.mixin";
     public static Logger LOGGER = LogManager.getLogger();
     public static boolean removedHudName = true;
     public static boolean lessTooltips = false;
@@ -80,14 +81,13 @@ public class Config implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         switch (mixinClassName){
-            case "tf.ssf.sfort.mixin.Cam":{return instantCrouch;}
-            case "tf.ssf.sfort.mixin.Item":{return lessTooltips;}
-            case "tf.ssf.sfort.mixin.HudItem":{return removedHudName;}
-            case "tf.ssf.sfort.mixin.HudArmor":{return removedHudArmor;}
-            case "tf.ssf.sfort.mixin.HudCross":{return dynamicCrosshair;}
-            case "tf.ssf.sfort.mixin.ItemStatic":{return staticTooltip;}
-
-            default:{return false;}
+            case mixin_dir+".Cam": return instantCrouch;
+            case mixin_dir+".Item": return lessTooltips;
+            case mixin_dir+".HudItem": return removedHudName;
+            case mixin_dir+".HudArmor": return removedHudArmor;
+            case mixin_dir+".HudCross": return dynamicCrosshair;
+            case mixin_dir+".ItemStatic": return staticTooltip;
+            default: return true;
         }
     }
     @Override public String getRefMapperConfig() { return null; }
