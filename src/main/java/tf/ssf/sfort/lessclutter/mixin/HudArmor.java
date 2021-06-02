@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(value = InGameHud.class, priority = 3702)
 public abstract class HudArmor {
-	@ModifyVariable(method = "renderStatusBars(Lnet/minecraft/client/util/math/MatrixStack;)V", index = 20, ordinal = 12, name = "v", at = @At("STORE"))
+	@ModifyVariable(method = "renderStatusBars(Lnet/minecraft/client/util/math/MatrixStack;)V", index = 20, name = "v", at = @At("STORE"))
 	private int armor(int old) {
 		return 0;
 	}
