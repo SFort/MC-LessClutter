@@ -4,17 +4,15 @@
   "package": "tf.ssf.sfort.lessclutter.mixin",
   "compatibilityLevel": "JAVA_16",
   "plugin": "tf.ssf.sfort.lessclutter.mixin.Config",
-  "mixins": [
-  ],
   "client": [
     "Cam",
-    "HudCross",
     "HudArmor",
+    "HudCross",
     "HudItem",
     "Item",
     "ItemStatic"
   ],
   "injectors": {
-	"defaultRequire": 1
+    "defaultRequire": 1
 }
 }
