@@ -24,6 +24,7 @@ public abstract class ItemStatic {
 	@Inject(method = "renderTooltipFromComponents(Lnet/minecraft/client/util/math/MatrixStack;Ljava/util/List;II)V",
 			at = @At(value = "HEAD"), cancellable = true)
 	public void renderOrderedTooltip(MatrixStack matrices, List<TooltipComponent> lines, int x, int y, CallbackInfo info) {
+		matrices.push();
 		y=10;
 		Matrix4f matrix4f = matrices.peek().getModel();
 		VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
