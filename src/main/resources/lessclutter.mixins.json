@@ -10,9 +10,10 @@
     "HudCross",
     "HudItem",
     "Item",
-    "ItemStatic"
+    "ItemStatic",
+    "HudArmorDirty"
   ],
   "injectors": {
     "defaultRequire": 1
-}
+  }
 }

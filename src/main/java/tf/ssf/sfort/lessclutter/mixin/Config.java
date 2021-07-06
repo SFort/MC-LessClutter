@@ -26,7 +26,7 @@ public class Config implements IMixinConfigPlugin {
     public static boolean dynamicCrosshair = true;
     public static boolean instantCrouch = true;
     public static boolean staticTooltip = false;
-    public static boolean removedHudArmor = true;
+    public static Boolean removedHudArmor = false;
     @Override
     public void onLoad(String mixinPackage) {
         // Configs
@@ -43,7 +43,7 @@ public class Config implements IMixinConfigPlugin {
                     "^-Dynamic cross-hair [true] true | false",
                     "^-Instant crouch [true] true | false",
                     "^-Static tooltip position [false] true | false",
-                    "^-Removed armor hud [true] true | false"
+                    "^-Removed armor hud [true] true | false | purge"
             );
             String[] ls = la.toArray(new String[Math.max(la.size(), defaultDesc.size() * 2)|1]);
             final int hash = Arrays.hashCode(ls);
@@ -65,8 +65,8 @@ public class Config implements IMixinConfigPlugin {
             try{ staticTooltip = ls[8].startsWith("true");}catch (Exception ignore){}
             ls[8] = String.valueOf(staticTooltip);
 
-            try{ removedHudArmor = ls[10].contains("true");}catch (Exception ignore){}
-            ls[10] = String.valueOf(removedHudArmor);
+            try{ removedHudArmor = ls[10].startsWith("false")? null : ls[10].contains("purge");}catch (Exception ignore){}
+            ls[10] = removedHudArmor == null ? "false" : removedHudArmor ? "purge" : "true";
 
             if (hash != Arrays.hashCode(ls))
                 Files.write(confFile.toPath(), Arrays.asList(ls));
@@ -80,15 +80,16 @@ public class Config implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        switch (mixinClassName){
-            case mixin_dir+".Cam": return instantCrouch;
-            case mixin_dir+".Item": return lessTooltips;
-            case mixin_dir+".HudItem": return removedHudName;
-            case mixin_dir+".HudArmor": return removedHudArmor;
-            case mixin_dir+".HudCross": return dynamicCrosshair;
-            case mixin_dir+".ItemStatic": return staticTooltip;
-            default: return true;
-        }
+        return switch (mixinClassName) {
+            case mixin_dir + ".Cam" -> instantCrouch;
+            case mixin_dir + ".Item" -> lessTooltips;
+            case mixin_dir + ".HudItem" -> removedHudName;
+            case mixin_dir + ".HudArmor" -> removedHudArmor != null && !removedHudArmor;
+            case mixin_dir + ".HudArmorDirty" -> removedHudArmor != null && removedHudArmor;
+            case mixin_dir + ".HudCross" -> dynamicCrosshair;
+            case mixin_dir + ".ItemStatic" -> staticTooltip;
+            default -> true;
+        };
     }
     @Override public String getRefMapperConfig() { return null; }
     @Override public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) { }
