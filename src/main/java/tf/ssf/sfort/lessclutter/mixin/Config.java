@@ -24,7 +24,7 @@ public class Config implements IMixinConfigPlugin {
     public static boolean staticTooltip = false;
     public static Boolean removedHudArmor = false;
     public static Boolean removedBook = null;
-    public static Float Vignette = 0.0F;
+    public static Float Vignette = null;
     @Override
     public void onLoad(String mixinPackage) {
         // Configs
@@ -68,9 +68,7 @@ public class Config implements IMixinConfigPlugin {
             try{ removedHudArmor = ls[10].startsWith("false")? null : ls[10].contains("purge");}catch (Exception ignore){}
             ls[10] = removedHudArmor == null ? "false" : removedHudArmor ? "purge" : "true";
 
-            try{ Vignette = Float.parseFloat(ls[12]);}catch (Exception ignore){try{
-                Vignette = ls[12].contains("null")? null : 0.0F;
-            }catch (Exception ignored){}}
+            try{ Vignette = Float.parseFloat(ls[12]);}catch (Exception ignore){}
             ls[12] = Vignette == null ? "null" : String.valueOf(Vignette);
 
             try{ removedBook = ls[14].startsWith("false")? null : ls[14].contains("purge");}catch (Exception ignore){}
