@@ -4,7 +4,7 @@ Configurable Features:
 
 - Removed recipe book
 
-> Removes recepie book item
+> Removes recepie book item  
 > purge option will also remove the code the book runs (could cause incompatabilities)
 
 - Vignette
@@ -13,7 +13,7 @@ Configurable Features:
 
 - Removed armor hud
 
-> No more pointless chestplate icons
+> No more pointless chestplate icons  
 > purge option will just remove the armor value (could cause incompatabilities)
 
 - Static Tooltips  
