@@ -1,9 +1,6 @@
 package tf.ssf.sfort.lessclutter.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.util.sat4j.core.VecInt;
-import net.minecraft.command.argument.CoordinateArgument;
-import net.minecraft.util.math.Vec2f;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +8,6 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.awt.*;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -27,6 +23,8 @@ public class Config implements IMixinConfigPlugin {
     public static boolean instantCrouch = true;
     public static boolean staticTooltip = false;
     public static Boolean removedHudArmor = false;
+    public static Boolean removedBook = null;
+    public static Float Vignette = 0.0F;
     @Override
     public void onLoad(String mixinPackage) {
         // Configs
@@ -43,7 +41,9 @@ public class Config implements IMixinConfigPlugin {
                     "^-Dynamic cross-hair [true] true | false",
                     "^-Instant crouch [true] true | false",
                     "^-Static tooltip position [false] true | false",
-                    "^-Removed armor hud [true] true | false | purge"
+                    "^-Removed armor hud [true] true | false | purge",
+                    "^-Vignette [0.0] null | 0.0 - 1.0 //setting to null disables the feature",
+                    "^-Remove Recipe Book [false] true | false | purge"
             );
             String[] ls = la.toArray(new String[Math.max(la.size(), defaultDesc.size() * 2)|1]);
             final int hash = Arrays.hashCode(ls);
@@ -68,6 +68,14 @@ public class Config implements IMixinConfigPlugin {
             try{ removedHudArmor = ls[10].startsWith("false")? null : ls[10].contains("purge");}catch (Exception ignore){}
             ls[10] = removedHudArmor == null ? "false" : removedHudArmor ? "purge" : "true";
 
+            try{ Vignette = Float.parseFloat(ls[12]);}catch (Exception ignore){try{
+                Vignette = ls[12].contains("null")? null : 0.0F;
+            }catch (Exception ignored){}}
+            ls[12] = Vignette == null ? "null" : String.valueOf(Vignette);
+
+            try{ removedBook = ls[14].startsWith("false")? null : ls[14].contains("purge");}catch (Exception ignore){}
+            ls[14] = removedBook == null ? "false" : removedBook ? "purge" : "true";
+
             if (hash != Arrays.hashCode(ls))
                 Files.write(confFile.toPath(), Arrays.asList(ls));
             LOGGER.log(Level.INFO,"tf.ssf.sfort.lessclutter successfully loaded config file");
@@ -86,6 +94,10 @@ public class Config implements IMixinConfigPlugin {
             case mixin_dir + ".HudItem" -> removedHudName;
             case mixin_dir + ".HudArmor" -> removedHudArmor != null && !removedHudArmor;
             case mixin_dir + ".HudArmorDirty" -> removedHudArmor != null && removedHudArmor;
+            case mixin_dir + ".HudVignotRed" -> Vignette != null && Vignette != 0.0F;
+            case mixin_dir + ".HudVignot" -> Vignette != null && Vignette == 0.0F;
+            case mixin_dir + ".access.Scren", mixin_dir + ".access.TextButton", mixin_dir + ".InvBook" -> removedBook != null;
+            case mixin_dir + ".NullBook" -> removedBook != null && removedBook;
             case mixin_dir + ".HudCross" -> dynamicCrosshair;
             case mixin_dir + ".ItemStatic" -> staticTooltip;
             default -> true;

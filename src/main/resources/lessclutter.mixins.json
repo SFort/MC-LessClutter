@@ -7,11 +7,17 @@
   "client": [
     "Cam",
     "HudArmor",
+    "HudArmorDirty",
     "HudCross",
     "HudItem",
     "Item",
     "ItemStatic",
-    "HudArmorDirty"
+    "HudVignot",
+    "HudVignotRed",
+    "NullBook",
+    "InvBook",
+    "access.TextButton",
+    "access.Scren"
   ],
   "injectors": {
     "defaultRequire": 1
