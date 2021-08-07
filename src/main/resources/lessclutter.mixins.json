@@ -10,14 +10,16 @@
     "HudArmorDirty",
     "HudCross",
     "HudItem",
-    "Item",
-    "ItemStatic",
     "HudVignot",
     "HudVignotRed",
-    "NullBook",
     "InvBook",
+    "Item",
+    "ItemEnchant",
+    "ItemStatic",
+    "NullBook",
+    "access.Scren",
     "access.TextButton",
-    "access.Scren"
+    "ItemFlags"
   ],
   "injectors": {
     "defaultRequire": 1

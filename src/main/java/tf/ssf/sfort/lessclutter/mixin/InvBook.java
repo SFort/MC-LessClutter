@@ -1,36 +1,25 @@
 package tf.ssf.sfort.lessclutter.mixin;
 
 import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.gui.Element;
+import net.minecraft.client.gui.Selectable;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tf.ssf.sfort.lessclutter.mixin.access.Scren;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tf.ssf.sfort.lessclutter.mixin.access.TextButton;
 
-@Mixin(value = InventoryScreen.class, priority = 2022)
-public abstract class InvBook extends AbstractInventoryScreen<PlayerScreenHandler> {
-	public InvBook(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
-		super(screenHandler, playerInventory, text);
-	}
+@Mixin(value = Screen.class, priority = 2022)
+public abstract class InvBook {
 
-	@Shadow @Final private static Identifier RECIPE_BUTTON_TEXTURE;
+	private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier("textures/gui/recipe_button.png");
 
-	@Inject(method = "init()V", at=@At("TAIL"))
-	public void init(CallbackInfo ci) {
-		if(!this.client.interactionManager.hasCreativeInventory()){
-			for (Drawable draw : ((Scren) this).getDrawables())
+	@Inject(method = "addDrawableChild(Lnet/minecraft/client/gui/Element;)Lnet/minecraft/client/gui/Element;", at=@At("HEAD"))
+	private <T extends Element & Drawable & Selectable> void init(T draw, CallbackInfoReturnable<T> cir) {
 				if (draw instanceof TexturedButtonWidget && ((TextButton) draw).getTexture().equals(RECIPE_BUTTON_TEXTURE))
 					((TexturedButtonWidget) draw).visible = false;
-		}
 	}
 }
