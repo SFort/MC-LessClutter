@@ -13,6 +13,6 @@ public abstract class HudVignotRed {
 
 	@Inject(method = "updateVignetteDarkness(Lnet/minecraft/entity/Entity;)V", cancellable = true, at = @At("TAIL"))
 	private void vignyet(CallbackInfo ci) {
-		this.vignetteDarkness = Config.Vignette;
+		this.vignetteDarkness = ConfigMixin.Vignette;
 	}
 }

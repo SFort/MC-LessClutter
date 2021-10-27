@@ -18,7 +18,10 @@
   "mixins": [
     "lessclutter.mixins.json"
   ],
-
+  "entrypoints": {
+    "main": ["tf.ssf.sfort.lessclutter.Config"],
+    "modmenu": ["tf.ssf.sfort.lessclutter.ModMenu"]
+  },
   "depends": {
     "fabricloader": "*",
     "minecraft": "*"

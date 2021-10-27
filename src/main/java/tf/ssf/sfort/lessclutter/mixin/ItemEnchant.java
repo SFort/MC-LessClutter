@@ -22,7 +22,7 @@ public abstract class ItemEnchant {
 	public void arg(ItemStack stack, CallbackInfoReturnable<List<Text>> info){
 		if (stack.getItem().equals(Items.ENCHANTED_BOOK)) return;
 		List<Text> txt = info.getReturnValue().stream().limit(1).collect(Collectors.toList());
-		if (stack.hasTag()) {
+		if (stack.hasNbt()) {
 			appendEnchantments(txt, stack.getEnchantments());
 		}
 		info.setReturnValue(txt);

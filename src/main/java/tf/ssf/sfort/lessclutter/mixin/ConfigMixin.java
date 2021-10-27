@@ -14,32 +14,33 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class Config implements IMixinConfigPlugin {
+public class ConfigMixin implements IMixinConfigPlugin {
     private static final String mixin_dir = "tf.ssf.sfort.lessclutter.mixin";
     public static Logger LOGGER = LogManager.getLogger();
     public static boolean removedHudName = true;
     public static Boolean lessTooltips = null;
-    public static boolean dynamicCrosshair = true;
+    public static String dynamicCrosshair = null;
+    public static boolean dynamicCrosshairMixin = true;
     public static boolean instantCrouch = true;
     public static boolean staticTooltip = false;
     public static int hideflags = 2;
     public static Boolean removedHudArmor = false;
     public static Boolean removedBook = null;
     public static Float Vignette = null;
+    public static File confFile = new File(
+            FabricLoader.getInstance().getConfigDir().toFile(),
+            "LessClutter.conf"
+    );
     @Override
     public void onLoad(String mixinPackage) {
         // Configs
-        File confFile = new File(
-                FabricLoader.getInstance().getConfigDir().toString(),
-                "LessClutter.conf"
-        );
         try {
-            confFile.createNewFile();
+            //confFile.createNewFile();
             List<String> la = Files.readAllLines(confFile.toPath());
             List<String> defaultDesc = Arrays.asList(
                     "^-Less item tooltips [false] true | false | enchants",
                     "^-Removed hud name display [true] true | false",
-                    "^-Dynamic cross-hair [true] true | false",
+                    "^-Dynamic cross-hair [true] true | false // another option is 'script:' if fscript lib is installed",
                     "^-Instant crouch [true] true | false",
                     "^-Static tooltip position [false] true | false",
                     "^-Removed armor hud [true] true | false | purge",
@@ -58,8 +59,16 @@ public class Config implements IMixinConfigPlugin {
             try{ removedHudName = ls[2].contains("true");}catch (Exception ignore){}
             ls[2] = String.valueOf(removedHudName);
 
-            try{ dynamicCrosshair = ls[4].contains("true");}catch (Exception ignore){}
-            ls[4] = String.valueOf(dynamicCrosshair);
+            try{
+                if (ls[4].startsWith("script:")){
+                    dynamicCrosshair = ls[4].substring("script:".length());
+                }else if (ls[4].startsWith("false")){
+                   dynamicCrosshairMixin = false;
+                   ls[4] = String.valueOf(dynamicCrosshairMixin);
+                }else{
+                    ls[4] = String.valueOf(dynamicCrosshairMixin);
+                }
+            }catch (Exception ignore){}
 
             try{ instantCrouch = ls[6].contains("true");}catch (Exception ignore){}
             ls[6] = String.valueOf(instantCrouch);
@@ -103,7 +112,7 @@ public class Config implements IMixinConfigPlugin {
             case mixin_dir + ".HudVignot" -> Vignette != null && Vignette == 0.0F;
             case mixin_dir + ".access.Scren", mixin_dir + ".access.TextButton", mixin_dir + ".InvBook" -> removedBook != null;
             case mixin_dir + ".NullBook" -> removedBook != null && removedBook;
-            case mixin_dir + ".HudCross" -> dynamicCrosshair;
+            case mixin_dir + ".HudCross" -> dynamicCrosshairMixin;
             case mixin_dir + ".ItemStatic" -> staticTooltip;
             default -> true;
         };

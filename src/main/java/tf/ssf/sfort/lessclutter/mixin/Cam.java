@@ -11,12 +11,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Camera.class)
 public class Cam {
     @Shadow
-    public float cameraY;
+    private float cameraY;
     @Shadow
     private Entity focusedEntity;
-    @Inject(method = "updateEyeHeight", at = @At("INVOKE"),cancellable = true)
+    @Inject(method = "updateEyeHeight", at = @At("TAIL"),cancellable = true)
     public void updateEyeHeight(CallbackInfo info){
-        cameraY = focusedEntity.getStandingEyeHeight();
-        info.cancel();
+        if(focusedEntity != null) {
+            cameraY = focusedEntity.getStandingEyeHeight();
+            info.cancel();
+        }
     }
 }
