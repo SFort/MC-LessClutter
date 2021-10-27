@@ -2,6 +2,11 @@ Client-side
 ## MC- Less Clutter
 Configurable Features:
 
+- Item Hide Flags
+> Removes modifiers by default  
+> See [hideflags by notwoods](https://notwoods.github.io/minecraft-tools/hideflags/) 
+
+
 - Removed recipe book
 
 > Removes recepie book item  
