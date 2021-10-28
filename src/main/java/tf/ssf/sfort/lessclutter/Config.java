@@ -35,7 +35,6 @@ public class Config implements ModInitializer {
     }
 
     public static String readCross() {
-        if (ConfigMixin.dynamicCrosshair == null) return dynCrosshairScriptString;
         try{
             List<String> la = Files.readAllLines(ConfigMixin.confFile.toPath());
             if(la.size() < 5 || !la.get(4).startsWith("script:")) return dynCrosshairScriptString;
