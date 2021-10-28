@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Config implements ModInitializer {
-    public static final String dynCrosshairScriptString = "!(~offhand:[block_item];~hand:[block_item])";
+    public static final String dynCrosshairScriptString = "!(~offhand:(block_item);~hand:(block_item))";
     public static Predicate<ClientPlayerEntity> dynamicCrosshair = player ->
             !(player.getMainHandStack().getItem() instanceof BlockItem || player.getOffHandStack().getItem() instanceof BlockItem);
 

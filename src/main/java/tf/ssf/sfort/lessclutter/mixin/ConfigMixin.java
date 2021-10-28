@@ -35,7 +35,7 @@ public class ConfigMixin implements IMixinConfigPlugin {
     public void onLoad(String mixinPackage) {
         // Configs
         try {
-            //confFile.createNewFile();
+            confFile.createNewFile();
             List<String> la = Files.readAllLines(confFile.toPath());
             List<String> defaultDesc = Arrays.asList(
                     "^-Less item tooltips [false] true | false | enchants",
