@@ -16,7 +16,7 @@ public class ConfigScreen extends Screen {
     }
     @Override
     public void init(){
-        addDrawableChild(new ButtonWidget(width/2-75, height/2-30, 150, 20, new LiteralText("Cross Crosshair"),
+        addDrawableChild(new ButtonWidget(width/2-75, height/2-30, 150, 20, new LiteralText("Dynamic Crosshair Script"),
                 p ->{
                     client.setScreen(new ScriptingScreen(
                             new LiteralText("Less Clutter Script"),
