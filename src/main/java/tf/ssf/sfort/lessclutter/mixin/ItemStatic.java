@@ -26,7 +26,7 @@ public abstract class ItemStatic {
 	public void renderOrderedTooltip(MatrixStack matrices, List<TooltipComponent> lines, int x, int y, CallbackInfo info) {
 		matrices.push();
 		y=10;
-		Matrix4f matrix4f = matrices.peek().getModel();
+		Matrix4f matrix4f = matrices.peek().getPositionMatrix();
 		VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
 		for(x=0; x<lines.size(); x++){
 			lines.get(x).drawText(client.textRenderer, 10, y, matrix4f, immediate);
