@@ -2,11 +2,10 @@ package tf.ssf.sfort.lessclutter;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import tf.ssf.sfort.script.Default;
 import tf.ssf.sfort.script.ScriptingScreen;
-import tf.ssf.sfort.script.instance.PlayerEntityScript;
 
 public class ConfigScreen extends Screen {
     final Screen screen;
@@ -23,7 +22,7 @@ public class ConfigScreen extends Screen {
                             this,
                             new ScriptingScreen.Script(
                                     "§bLess Clutter - Crosshair",
-                                    new PlayerEntityScript<ClientPlayerEntity>(),
+                                    Default.PLAYER_ENTITY,
                                     Config::writeCross,
                                     null,
                                     Config::readCross,
