@@ -1,5 +1,6 @@
 package tf.ssf.sfort.lessclutter.mixin;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,9 +18,9 @@ import static net.minecraft.item.ItemStack.appendEnchantments;
 @Mixin(value = Screen.class, priority = 4142)
 public abstract class ItemEnchant {
 
-	@Inject(method = "getTooltipFromItem(Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
+	@Inject(method = "getTooltipFromItem(Lnet/minecraft/client/MinecraftClient;Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
 			at = @At("RETURN"), cancellable = true)
-	public void arg(ItemStack stack, CallbackInfoReturnable<List<Text>> info){
+	private static void arg(MinecraftClient client, ItemStack stack, CallbackInfoReturnable<List<Text>> info){
 		if (stack.getItem().equals(Items.ENCHANTED_BOOK)) return;
 		List<Text> txt = info.getReturnValue().stream().limit(1).collect(Collectors.toList());
 		if (stack.hasNbt()) {

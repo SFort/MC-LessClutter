@@ -1,9 +1,7 @@
 package tf.ssf.sfort.lessclutter.mixin;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +14,7 @@ public abstract class HudItem {
 	private int heldItemTooltipFade;
 
 	@Inject(at = @At("HEAD"), method = "renderHeldItemTooltip")
-	public void renderHeldItemTooltip(MatrixStack matrixStack, CallbackInfo info){
+	public void renderHeldItemTooltip(DrawContext matrixStack, CallbackInfo info){
 		heldItemTooltipFade = 0;
 	}
 }

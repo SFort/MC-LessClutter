@@ -1,8 +1,8 @@
 package tf.ssf.sfort.lessclutter.mixin;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,7 +18,7 @@ public abstract class HudCross {
 	private MinecraftClient client;
 
 	@Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
-	private void renderCrosshair(MatrixStack matrices, CallbackInfo info) {
+	private void renderCrosshair(DrawContext matrices, CallbackInfo info) {
 		if (Config.dynamicCrosshair.test(client.player))
 			info.cancel();
 	}

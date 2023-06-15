@@ -1,7 +1,6 @@
 package tf.ssf.sfort.lessclutter.mixin;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,9 +13,9 @@ import java.util.stream.Collectors;
 @Mixin(value = Screen.class, priority = 4142)
 public abstract class Item {
 
-	@Inject(method = "getTooltipFromItem(Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
+	@Inject(method = "getTooltipFromItem(Lnet/minecraft/client/MinecraftClient;Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
 			at = @At("RETURN"), cancellable = true)
-	public void arg(ItemStack stack, CallbackInfoReturnable<List<Text>> info){
+	private static void arg(CallbackInfoReturnable<List<Text>> info){
 		info.setReturnValue(info.getReturnValue().stream().limit(1).collect(Collectors.toList()));
 	}
 }

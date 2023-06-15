@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '0.11-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_16
@@ -28,8 +28,10 @@ dependencies {
 
 	//ModMenu
 	modImplementation fabricApi.module("fabric-resource-loader-v0", "${project.fabric_version}")
-	modRuntime(fabricApi.module("fabric-screen-api-v1", "${project.fabric_version}"))
-	modImplementation("com.terraformersmc:modmenu:2.0.3") {
+	modImplementation fabricApi.module("fabric-key-binding-api-v1", "${project.fabric_version}")
+	modImplementation fabricApi.module("fabric-lifecycle-events-v1", "${project.fabric_version}")
+	modRuntimeOnly(fabricApi.module("fabric-screen-api-v1", "${project.fabric_version}"))
+	modImplementation("com.terraformersmc:modmenu:7.0.1") {
 		transitive = false
 	}
 }

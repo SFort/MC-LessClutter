@@ -16,11 +16,6 @@ public class NullBook {
         ci.cancel();
     }
 
-    @Inject(at=@At("HEAD"), method = "close", cancellable = true)
-    public void close(CallbackInfo ci) {
-        ci.cancel();
-    }
-
     @Inject(at=@At("HEAD"), method = "reset", cancellable = true)
     public void reset(CallbackInfo ci) {
         ci.cancel();
