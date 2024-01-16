@@ -17,8 +17,6 @@
     "ItemEnchant",
     "ItemStatic",
     "NullBook",
-    "access.Scren",
-    "access.TextButton",
     "ItemFlags"
   ],
   "injectors": {
